@@ -1,8 +1,8 @@
 TCP EVIL
 ========
 
-TCP-EVIL Congestion control algorithm, based on very few
-modifications to tcp_hybla
+TCP-EVIL Congestion control algorithm, based on very few Modifications
+to tcp_hybla
 
 Modifications are simple:
 
