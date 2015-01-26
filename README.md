@@ -5,7 +5,7 @@ TCP-EVIL Congestion control algorithm, based on very few modifications
 to tcp_hybla
 
 This module is for Linux 3.2, Debian 7. Use `apt-get source` your kernel
-on Debian 7 to get the code for the same kernel version.
+on Debian 7 to get the kernel source for the same kernel version.
 
 Modifications are simple:
 
