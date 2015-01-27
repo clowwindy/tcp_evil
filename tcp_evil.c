@@ -15,6 +15,7 @@
 
 #include <linux/module.h>
 #include <net/tcp.h>
+#include <asm/i387.h>
 
 /* Tcp evil structure. */
 struct evil {
@@ -169,7 +170,11 @@ static void evil_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 u32 evil_ssthresh(struct sock *sk)
 {
 	const struct tcp_sock *tp = tcp_sk(sk);
-	return max(tp->snd_cwnd * 0.9, 2U);
+	u32 ret;
+	kernel_fpu_begin();
+	ret = max_t(u32, tp->snd_cwnd * 0.9, 2U);
+	kernel_fpu_end();
+	return ret;
 }
 EXPORT_SYMBOL_GPL(evil_ssthresh);
 
