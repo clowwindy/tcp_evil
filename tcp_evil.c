@@ -170,10 +170,9 @@ static void evil_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 u32 evil_ssthresh(struct sock *sk)
 {
 	const struct tcp_sock *tp = tcp_sk(sk);
-	u32 ret;
-	kernel_fpu_begin();
-	ret = max_t(u32, tp->snd_cwnd * 0.9, 2U);
-	kernel_fpu_end();
+	u32 ret = tp->snd_cwnd;
+	ret = ret - (ret >> 1U) + (ret >> 2U) + (ret >> 3U) + (ret >> 5U);
+	ret = max_t(u32, ret, 2U);
 	return ret;
 }
 EXPORT_SYMBOL_GPL(evil_ssthresh);
